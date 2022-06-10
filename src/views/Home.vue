@@ -7,25 +7,34 @@
           <b-row class="justify-content-md-center">
             <b-col col lg="5">
               <label for="input-none">Input 1 :</label>
-              <b-form-input v-model="inpunt1"></b-form-input>
+              <b-form-input
+                id="input1"
+                v-model="input1" 
+                :disabled="
+                  selected === '+' ||
+                  selected === '-' ||
+                  selected === '*' ||
+                  selected === '÷'
+                "
+              ></b-form-input>
               <label for="input-none">Input 2 :</label><br />
-              <b-form-input v-model="inpunt1"></b-form-input>
-              <br /><br /><label for="input-none">Result : {{p}}</label>
+              <b-form-input id="input2" v-model="input2"></b-form-input>
+
+              <!-- oparator -->
+              <br /><b-form-select
+                v-model="selected"
+                :options="options"
+                @change="select()"
+              ></b-form-select>
+              <!-- oparator -->
+
+              <br /><br /><strong
+                ><label>Result : {{ input1 }} {{ selected }} {{ input2 }} = </label></strong
+              >
             </b-col>
           </b-row>
         </b-container>
         <!-- zone input -->
-
-        <!-- oparator -->
-
-        <div class="mt-3 bt">
-          <b-button variant="outline-success m-2" @click="plus('+')">&nbsp;+&nbsp;</b-button>
-          <b-button variant="outline-danger m-2">&nbsp;-&nbsp;</b-button>
-          <b-button variant="outline-secondary m-2">&nbsp;*&nbsp;</b-button>
-          <b-button variant="outline-info m-2">&nbsp;÷&nbsp;</b-button>
-        </div>
-
-        <!-- oparator -->
 
         <div class="bt">
           <b-button
@@ -33,8 +42,10 @@
             :key="index"
             variant="outline-primary m-1"
             @click="setnum(index)"
-            >{{ number }}</b-button
-          >
+            >{{ number }}</b-button>
+        </div>
+        <div class="btopa">
+          <b-button variant="outline-dark" @click="resetInput">Clear</b-button>
         </div>
       </b-card>
     </div>
@@ -46,25 +57,54 @@ export default {
   data() {
     return {
       number: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-      inpunt1: '',
-      inpunt2: '',
-
+      input1: '',
+      input2: '',
+      logtest:false,
+      selected: null,
+      options: [
+        { value: null, text: 'ไม่เลือก' },
+        { value: '+', text: 'บวก' },
+        { value: '-', text: 'ลบ' },
+        { value: '*', text: 'คูณ' },
+        { value: '÷', text: 'หาร' },
+      ],
     };
   },
   methods: {
     setnum(index) {
-      this.inpunt1 += index;
+
+      if(this.logtest == true){
+        this.input2 += index;
+        
+      }else{
+        this.input1 += index;
+      }
+      console.log(this.logtest)
+        
     },
-    plus(){
-      this.p = '+'
-      console.log(p);
-    }
+    select(){
+      this.logtest = true
+    },
+    resetInput() {
+      this.input1 = "";
+      this.input2 = "";
+      this.logtest = flase;
+      this.selected.options.value == null
+    },
   },
 };
 </script>
 
 <style>
 .bt {
+  display: block;
+  text-align: center;
+  border: none;
+  margin-top: 30px;
+  border-radius: 6px;
+}
+
+.btopa {
   display: block;
   text-align: center;
   border: none;
