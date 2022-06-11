@@ -6,6 +6,8 @@
         <b-container class="bv-example-row">
           <b-row class="justify-content-md-center">
             <b-col col lg="5">
+              <h1 style="text-align: center;">Calculator vue</h1>
+              <br />
               <label for="input-none">Input 1 :</label><br />
               <b-input-group>
                 <b-form-input
