@@ -6,19 +6,36 @@
         <b-container class="bv-example-row">
           <b-row class="justify-content-md-center">
             <b-col col lg="5">
-              <label for="input-none">Input 1 :</label>
-              <b-form-input
-                id="input1"
-                v-model="input1" 
-                :disabled="
-                  selected === '+' ||
-                  selected === '-' ||
-                  selected === '*' ||
-                  selected === '÷'
-                "
-              ></b-form-input>
+              <label for="input-none">Input 1 :</label><br />
+              <b-input-group>
+                <b-form-input
+                  id="input1"
+                  type="number"
+                  v-model="input1"
+                  :disabled="
+                    selected === '+' ||
+                    selected === '-' ||
+                    selected === '*' ||
+                    selected === '÷'
+                  "
+                  autofocus
+                ></b-form-input>
+                <b-input-group-append>       
+                  <b-button variant="outline-primary" @click="deletevalue1()">Delete</b-button>
+                </b-input-group-append>
+              </b-input-group>
+
               <label for="input-none">Input 2 :</label><br />
-              <b-form-input id="input2" v-model="input2"></b-form-input>
+              <b-input-group>
+                <b-form-input
+                  id="input2"
+                  type="number"
+                  v-model="input2"
+                ></b-form-input>
+                <b-input-group-append>
+                  <b-button variant="outline-primary">Delete</b-button>
+                </b-input-group-append>
+              </b-input-group>
 
               <!-- oparator -->
               <br /><b-form-select
@@ -29,7 +46,9 @@
               <!-- oparator -->
 
               <br /><br /><strong
-                ><label>Result : {{ input1 }} {{ selected }} {{ input2 }} = </label></strong
+                ><label
+                  >Result : {{ input1 }} {{ selected }} {{ input2 }} = {{ sum }}
+                </label></strong
               >
             </b-col>
           </b-row>
@@ -42,10 +61,12 @@
             :key="index"
             variant="outline-primary m-1"
             @click="setnum(index)"
-            >{{ number }}</b-button>
+            >{{ number }}</b-button
+          >
         </div>
         <div class="btopa">
-          <b-button variant="outline-dark" @click="resetInput">Clear</b-button>
+          <b-button variant="outline-dark" @click="sumresult()">Sum</b-button>
+          <b-button variant="outline-dark m-2" @click="resetvalue()">Clear</b-button>
         </div>
       </b-card>
     </div>
@@ -59,7 +80,7 @@ export default {
       number: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
       input1: '',
       input2: '',
-      logtest:false,
+      logtest: false,
       selected: null,
       options: [
         { value: null, text: 'ไม่เลือก' },
@@ -68,28 +89,54 @@ export default {
         { value: '*', text: 'คูณ' },
         { value: '÷', text: 'หาร' },
       ],
+      sum: 0,
     };
   },
   methods: {
     setnum(index) {
-
-      if(this.logtest == true){
-        this.input2 += index;
-        
-      }else{
-        this.input1 += index;
+      if (index === 0 && this.input1 === '') {
+        alert('ใส่ 0 ก่อนไม่ได้นะค้าบ');
+      } else if (index === 0 && this.input2 === '') {
+        alert('ใส่ 0 ก่อนไม่ได้นะค้าบ');
+      } else {
+        if (this.logtest == true) {
+          this.input2 += index;
+        } else {
+          this.input1 += index;
+        }
       }
-      console.log(this.logtest)
-        
     },
-    select(){
-      this.logtest = true
+    select() {
+      this.logtest = true;
     },
-    resetInput() {
-      this.input1 = "";
-      this.input2 = "";
-      this.logtest = flase;
-      this.selected.options.value == null
+    sumresult() {
+      if (this.selected === '+') {
+        this.sum = parseFloat(this.input1) + parseFloat(this.input2);
+        console.log(this.input1);
+        console.log(this.input2);
+        console.log(this.sum);
+        alert('เลือกบวก');
+      } else if (this.selected === '-') {
+        alert('เลือกลบ');
+        this.sum = parseFloat(this.input1) - parseFloat(this.input2);
+      } else if (this.selected === '*') {
+        alert('เลือกคุณ อิอิ');
+        this.sum = parseFloat(this.input1) * parseFloat(this.input2);
+      } else if (this.selected === '÷') {
+        alert('เลือกลบหาร');
+        this.sum = parseFloat(this.input1) / parseFloat(this.input2);
+      }
+    },
+    resetvalue() {
+      this.input1 = '';
+      this.input2 = '';
+      this.selected = null;
+      this.sum = 0;
+      this.logtest = false;
+    },
+    deletevalue1() {
+      this.input1.slice(1, this.input1.length - 1)
+      console.log(this.input1)
     },
   },
 };
