@@ -11,6 +11,7 @@
                 <b-form-input
                   id="input1"
                   type="number"
+                  min="0"
                   v-model="input1"
                   :disabled="
                     selected === '+' ||
@@ -20,8 +21,10 @@
                   "
                   autofocus
                 ></b-form-input>
-                <b-input-group-append>       
-                  <b-button variant="outline-primary" @click="deletevalue1()">Delete</b-button>
+                <b-input-group-append>
+                  <b-button variant="outline-primary" @click="deletevalue1()"
+                    >Delete</b-button
+                  >
                 </b-input-group-append>
               </b-input-group>
 
@@ -30,10 +33,13 @@
                 <b-form-input
                   id="input2"
                   type="number"
+                  min="0"
                   v-model="input2"
                 ></b-form-input>
                 <b-input-group-append>
-                  <b-button variant="outline-primary">Delete</b-button>
+                  <b-button variant="outline-primary" @click="deletevalue2()"
+                    >Delete</b-button
+                  >
                 </b-input-group-append>
               </b-input-group>
 
@@ -66,7 +72,9 @@
         </div>
         <div class="btopa">
           <b-button variant="outline-dark" @click="sumresult()">Sum</b-button>
-          <b-button variant="outline-dark m-2" @click="resetvalue()">Clear</b-button>
+          <b-button variant="outline-dark m-2" @click="resetvalue()"
+            >Clear</b-button
+          >
         </div>
       </b-card>
     </div>
@@ -107,7 +115,16 @@ export default {
       }
     },
     select() {
-      this.logtest = true;
+      if (this.input1 == '') {
+        alert('กรุณาใส่ข้อมูลช่องแรกก่อนครับ');
+        this.input1 = '';
+        this.input2 = '';
+        this.selected = null;
+        this.sum = 0;
+        this.logtest = false;
+      } else {
+        this.logtest = true;
+      }
     },
     sumresult() {
       if (this.selected === '+') {
@@ -135,8 +152,10 @@ export default {
       this.logtest = false;
     },
     deletevalue1() {
-      this.input1.slice(1, this.input1.length - 1)
-      console.log(this.input1)
+      this.input1 = this.input1.toString().slice(0, -1);
+    },
+    deletevalue2() {
+      this.input2 = this.input2.toString().slice(0, -1);
     },
   },
 };
