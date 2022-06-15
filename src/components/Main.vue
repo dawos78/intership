@@ -16,7 +16,7 @@
         <b-tab title="Computed"><p><api3></api3></p></b-tab>
         <b-tab title="Methods"><p><api4></api4></p></b-tab>
         <b-tab title="Watch"><p><api5></api5></p></b-tab>
-        <b-tab title="Props"><p><api6 name="Got" depart="Test"></api6></p></b-tab>
+        <b-tab title="Props"><p><api6 :name="testvalue" depart="Test"></api6></p></b-tab>
       </b-tabs>
     </div>
   </div>
@@ -37,6 +37,11 @@ export default {
     api4,
     api5,
     api6,
+  },
+  data() {
+    return {
+      testvalue: 'gotji'
+    }
   },
 }
 
