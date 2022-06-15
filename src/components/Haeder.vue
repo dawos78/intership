@@ -1,35 +1,31 @@
 <template>
-    <div class="haederSection">
-    <b-list-group class="justify-content-center ">
-    <b-list-group-item>
-      <b-avatar button @click="onClick" variant="primary" text="G" class="align-baseline"></b-avatar>
-      Got'Ji
-    </b-list-group-item>
-  </b-list-group>
+  <div class="haederSection">
+    <div>
+      <!-- As a heading -->
+
+      <b-navbar variant="faded" type="light">
+        <b-navbar-brand tag="h1" class="mb-0 ml-auto">
+          <b-nav-form>
+            <b-form-input placeholder="Search"></b-form-input>
+            <b-button class="mx-2" type="submit">Search</b-button>
+
+            <b-avatar variant="danger"></b-avatar>
+          </b-nav-form>
+        </b-navbar-brand>
+      </b-navbar>
     </div>
+  </div>
 </template>
 
 <script>
-  export default {
-    methods: {
-      onClick() {
-        this.$bvModal.msgBoxOk('Username: ggthkk.\n Email: babagatom@gmail.com', {
-          title: 'รายละเอียด',
-          size: 'md',
-          buttonSize: 'md',
-          okVariant: 'success',
-          headerClass: 'p-2 border-bottom-0',
-          footerClass: 'p-2 border-top-0'
-        })
-      }
-    }
-  }
+export default {};
 </script>
 
 <style>
-.haederSection{
-    grid-area: haederSection;
-    margin-top: 10px;
-    text-align: right;
+.haederSection {
+  grid-area: haederSection;
+  margin-top: 10px;
+  margin-right: 10px;
+  text-align: left;
 }
 </style>

@@ -29,7 +29,7 @@ export default {
   
   display: grid;
   box-sizing: border-box;
-  grid-template-rows: 1fr 4fr 3fr;
+  grid-template-rows: 1fr 6fr 1fr;
   grid-template-columns: 1fr 3fr 1fr;
   gap: 2px;
   height: 100vh;

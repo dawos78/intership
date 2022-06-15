@@ -1,20 +1,32 @@
 <template>
-  <div class="SideBar">
-    <nav class="mb-3">
-      <b-nav vertical>
-        <img src="../assets/logo.png" style="margin: 20px" alt="" />
-        <b-nav-item active>หน้าหลัก</b-nav-item>
-        <b-nav-item active>เกี่ยวกับ</b-nav-item>
-        <b-nav-item active>แผนที่</b-nav-item>
-        <b-nav-item active>ไปนู้น</b-nav-item>
-        <b-nav-item active>ไปนี่</b-nav-item>
-      </b-nav>
-    </nav>
+  <div class="Sidebar">
+    <!-- <b-button v-b-toggle.sidebar-no-header>Toggle Sidebar</b-button> -->
+    <b-sidebar
+      bg-variant="light"
+      id="sidebar-no-header"
+      aria-labelledby="sidebar-no-header-title"
+      no-header
+      shadow
+      visible
+    >
+      <img src="../assets/logo.png" width="100%" alt="" />
+      <div class="bg-light text-dark menu" v-for="n in menu" :key="n">
+        <strong class="mr-auto">{{n}}</strong>
+      </div>
+    </b-sidebar>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data(){
+    return{
+      menu:["Home","About","Vue","Map","User"]
+    }
+  }
+
+
+};
 </script>
 
 <style>
@@ -24,12 +36,23 @@ export default {};
   grid-area: SideBar;
   border: 10px;
   border-color: black;
+  margin: 60px 50% 20px 20px;
 }
-.nav-item.nav-item.nav-item a {
-  font-family: 'Kanit', sans-serif;
-  color: red;
+#sidebar-no-header {
+  width: 19%;
+}
+@media screen and (max-width: 600px) {
+  #sidebar-no-header {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
+  }
+}
+.menu{
+  padding: 15px;
   text-align: center;
-  text-underline-position: none;
-  font-weight: bold;
 }
 </style>
