@@ -9,7 +9,7 @@
       shadow
       visible
     >
-      <img src="../assets/logo.png" width="100%" alt="" />
+      <img src="../assets/logo.png" class="pic" alt="" />
       <div class="bg-light text-dark menu" v-for="n in menu" :key="n">
         <strong class="mr-auto">{{n}}</strong>
       </div>
@@ -54,5 +54,13 @@ export default {
 .menu{
   padding: 15px;
   text-align: center;
+}
+.pic{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 </style>
